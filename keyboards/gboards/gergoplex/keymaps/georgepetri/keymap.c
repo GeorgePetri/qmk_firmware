@@ -51,9 +51,8 @@ td_state_t cur_dance(qk_tap_dance_state_t *state);
 void ql_finished(qk_tap_dance_state_t *state, void *user_data);
 void ql_reset(qk_tap_dance_state_t *state, void *user_data);
 
+#define KC_ALT_D  MT(MOD_LALT, KC_D)     // Tap for D, hold for Alt
 #define KC_CTL_A  MT(MOD_LCTL, KC_A)     // Tap for A, hold for Control
-#define KC_SFT_Z  MT(MOD_RSFT, KC_Z)     // Tap for Z, hold for Shift
-#define KC_SFT_SL MT(MOD_RSFT, KC_SLSH)  // Tap for slash, hold for Shift
 #define KC_SPE_SPC LT(_SPECIAL, KC_SPC)  // Tap for Space, hold for Special layer
 #define KC_NUM_SPC LT(_NUMBERS, KC_SPC)  // Tap for Space, hold for Numbers layer
 
@@ -75,40 +74,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Alpha layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |     Q |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |   P   |
+     * |   Q   |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |   P   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | CTRL A|  S  |  D  |  F  |  G  |      |  H  |  J  |  K  |  L  |   ;   |
+     * | CTRL A|  S  |ALT D|  F  |  G  |      |  H  |  J  |  K  |  L  |   ;   |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * | SHFT Z|  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |SHFT / |
+     * |   Z   |  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |   /   |
      * `-------------------------------'      `-------------------------------'
-     *       .----------------------.           .----------------------.
-     *       | META | ALT | SPC SPE |           | SPC NUM | TAB | SHFT |
-     *       '----------------------'           '----------------------'
+     *       .-----------------------.           .----------------------.
+     *       | META | SPC SPE | SHFT |           | SHFT | SPC NUM | TAB |
+     *       '-----------------------'           '----------------------'
      */
     [_ALPHA] = LAYOUT_split_3x5_3(
-         KC_Q,     KC_W,   KC_E,   KC_R,   KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,   KC_P,
-         KC_CTL_A, KC_S,   KC_D,   KC_F,   KC_G,          KC_H,   KC_J,   KC_K,     KC_L,   KC_SCLN,
-         KC_SFT_Z, KC_X,   KC_C,   KC_V,   KC_B,          KC_N,   KC_M,   TD(GAME), KC_DOT, KC_SFT_SL,
-                   KC_LGUI, KC_LALT, KC_SPE_SPC,          KC_NUM_SPC, KC_TAB, KC_RSFT),
+         KC_Q,     KC_W,   KC_E,    KC_R,   KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,   KC_P,
+         KC_CTL_A, KC_S,   KC_ALT_D,KC_F,   KC_G,          KC_H,   KC_J,   KC_K,     KC_L,   KC_SCLN,
+         KC_Z,     KC_X,   KC_C,    KC_V,   KC_B,          KC_N,   KC_M,   TD(GAME), KC_DOT, KC_SLSH,
+                    KC_LGUI, KC_SPE_SPC, KC_LSFT,          KC_RSFT, KC_NUM_SPC, KC_TAB),
 
     /* Gaming layer
      *
      * ,-------------------------------.      ,-------------------------------.
-     * |   ~   |  Q  |  W  |  E  |  R  |      |  Y  |  U  |  I  |  O  |   P   |
+     * |   ~   |  Q  |  W  |  E  |  R  |      |     |     |     |     |       |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |  CTRL |  A  |  S  |  D  |  F  |      |  H  |  J  |  K  |  L  |   ;   |
+     * |  CTRL |  A  |  S  |  D  |  F  |      |     |     |     |     |       |
      * |-------+-----+-----+-----+-----|      |-----+-----+-----+-----+-------|
-     * |  SHFT |  Z  |  X  |  C  |  V  |      |  N  |  M  |  ,  |  .  |SHFT / |
+     * |  SHFT |  Z  |  X  |  C  |  V  |      |     |     |     |     |       |
      * `-------------------------------'      `-------------------------------'
      *           .------------------.           .----------------------.
-     *           | META | ALT | SPC |           | SPC NUM | TAB | SHFT |
+     *           | META | ALT | SPC |           |         |     |      |
      *           '------------------'           '----------------------'
      */
     [_GAME] = LAYOUT_split_3x5_3(
-         KC_TILD,  KC_Q,   KC_W,   KC_E,   KC_R,          KC_Y,   KC_U,   KC_I,     KC_O,   KC_P,
-         KC_LCTL , KC_A,   KC_S,   KC_D,   KC_F,          KC_H,   KC_J,   KC_K,     KC_L,   KC_SCLN,
-         KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,          KC_N,   KC_M,   TD(GAME), KC_DOT, KC_SFT_SL,
-                       KC_LGUI, KC_LALT, KC_SPC,          KC_NUM_SPC, KC_TAB, KC_RSFT),
+         KC_TILD,  KC_Q,   KC_W,   KC_E,   KC_R,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+         KC_LCTL , KC_A,   KC_S,   KC_D,   KC_F,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+         KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                       KC_LGUI, KC_LALT, KC_SPC,          KC_TRNS, KC_TRNS, KC_TRNS),
 
     /* Special characters layer
      *
@@ -148,15 +147,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                     KC_F11, KC_F12, KC_TRNS,         KC_TRNS, KC_TRNS, KC_TRNS)
 };
-
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case KC_CTL_A:
-            return false;
-        default:
-            return true;
-    }
-}
 
 td_state_t cur_dance(qk_tap_dance_state_t *state) {
     if (state->count == 1)
