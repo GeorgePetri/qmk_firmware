@@ -1,7 +1,7 @@
 // Gergoplex specfic combos
 
-COMB(hjEnt,         KC_ENT,         KC_H, KC_J)
+COMB(jmEnt,         KC_ENT,         KC_J, KC_M)
 COMB(loDel,         KC_DEL,         KC_L, KC_O)
 COMB(pscBspace,     KC_BSPC,        KC_P, KC_SCLN)
-COMB(sdEsc,         KC_ESC,         KC_D, KC_F)
-COMB(fgEsc,         KC_ESC,         KC_F, KC_G)
+COMB(fvEsc,         KC_ESC,         KC_F, KC_V)
+COMB(dcEsc,         KC_ESC,         KC_D, KC_C)
