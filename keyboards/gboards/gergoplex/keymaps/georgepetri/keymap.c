@@ -30,28 +30,6 @@ enum {
 
 #include "g/keymap_combo.h"
 
-typedef enum {
-    TD_NONE,
-    TD_UNKNOWN,
-    TD_SINGLE_TAP,
-    TD_DOUBLE_TAP,
-    TD_TRIPLE_TAP
-} td_state_t;
-
-typedef struct {
-    bool is_press_action;
-    td_state_t state;
-} td_tap_t;
-
-enum {
-    GAME
-};
-
-td_state_t cur_dance(qk_tap_dance_state_t *state);
-
-void ql_finished(qk_tap_dance_state_t *state, void *user_data);
-void ql_reset(qk_tap_dance_state_t *state, void *user_data);
-
 #define KC_ALT_D  MT(MOD_LALT, KC_D)     // Tap for D, hold for Alt
 #define KC_ALT_K  MT(MOD_RALT, KC_K)     // Tap for K, hold for Alt
 #define KC_CTL_S  MT(MOD_LCTL, KC_S)     // Tap for S, hold for Control
@@ -151,46 +129,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      KC_0, KC_TRNS, KC_TRNS,         KC_TRNS, KC_TRNS, KC_TRNS)
 };
 
-td_state_t cur_dance(qk_tap_dance_state_t *state) {
-    if (state->count == 1)
-        return TD_SINGLE_TAP;
-    if (state->count == 2)
-        return TD_DOUBLE_TAP;
-    else if (state->count == 3)
-	return TD_TRIPLE_TAP;
-    return TD_UNKNOWN;
-}
-
-static td_tap_t ql_tap_state = {
-    .is_press_action = true,
-    .state = TD_NONE
-};
-
-void ql_finished(qk_tap_dance_state_t *state, void *user_data) {
-    ql_tap_state.state = cur_dance(state);
-    switch (ql_tap_state.state) {
-        case TD_SINGLE_TAP:
-            tap_code(KC_COMMA);
-            break;
-        case TD_DOUBLE_TAP:
-            tap_code(KC_COMMA);
-            tap_code(KC_COMMA);
-            break;
-        case TD_TRIPLE_TAP:
-            if (layer_state_is(_GAME))
-                layer_off(_GAME);
-            else
-                layer_on(_GAME);
-            break;
-        default:
-            break;
-    }
-}
-
-void ql_reset(qk_tap_dance_state_t *state, void *user_data) {
-    ql_tap_state.state = TD_NONE;
-}
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [GAME] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ql_finished, ql_reset, 275)
-};
