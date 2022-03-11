@@ -20,7 +20,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "g/keymap_combo.h"
 
 enum {
     _ALPHA,   // default
@@ -28,6 +27,8 @@ enum {
     _SPECIAL, // special characters
     _NUMBERS  // numbers/function/motion
 };
+
+#include "g/keymap_combo.h"
 
 typedef enum {
     TD_NONE,
@@ -62,7 +63,7 @@ void ql_reset(qk_tap_dance_state_t *state, void *user_data);
      *
      * ,-----------------------------.      ,-----------------------------.
      * |     |     |     |     |     |      |     |     |     |     |     |
-     * |-----+-----+-----+-----+-----|      |-----+-----+-----+-DEL-+-BSPC|
+     * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-BSPC|
      * |     |     |     |     |     |      |     |     |     |     |     |
      * |-----+-----+-----+-ESC-+-----|      |-----+-ENT-+-----+-----+-----|
      * |     |     |     |     |     |      |     |     |     |     |     |
@@ -89,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ALPHA] = LAYOUT_split_3x5_3(
          KC_Q, KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,
          KC_A, KC_CTL_S,KC_ALT_D,KC_F,    KC_G,          KC_H,   KC_J,   KC_ALT_K, KC_CTL_L,KC_SCLN,
-         KC_Z, KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   TD(GAME), KC_DOT,  KC_SLSH,
+         KC_Z, KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   KC_COMMA, KC_DOT,  KC_SLSH,
                   KC_LGUI, KC_SPE_SPC, KC_LSFT,          KC_RSFT, KC_NB, KC_TAB),
 
     /* Gaming layer
