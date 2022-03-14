@@ -30,12 +30,13 @@ enum {
 
 #include "g/keymap_combo.h"
 
-#define KC_ALT_D  MT(MOD_LALT, KC_D)     // Tap for D, hold for Alt
-#define KC_ALT_K  MT(MOD_RALT, KC_K)     // Tap for K, hold for Alt
-#define KC_CTL_S  MT(MOD_LCTL, KC_S)     // Tap for S, hold for Control
-#define KC_CTL_L  MT(MOD_RCTL, KC_L)     // Tap for L, hold for Control
+#define KC_GUI_A   MT(MOD_LGUI, KC_A)    // Tap for A, hold for Meta
+#define KC_ALT_D   MT(MOD_LALT, KC_D)    // Tap for D, hold for Alt
+#define KC_ALT_K   MT(MOD_RALT, KC_K)    // Tap for K, hold for Alt
+#define KC_CTL_S   MT(MOD_LCTL, KC_S)    // Tap for S, hold for Control
+#define KC_CTL_L   MT(MOD_RCTL, KC_L)    // Tap for L, hold for Control
 #define KC_SPE_SPC LT(_SPECIAL, KC_SPC)  // Tap for Space, hold for Special layer
-#define KC_NB MO(_NUMBERS)               // Press for Numbers layer
+#define KC_NB      MO(_NUMBERS)          // Press for Numbers layer
 
     /* Combomap
      *
@@ -43,7 +44,7 @@ enum {
      * |     |     |     |     |     |      |     |     |     |     |     |
      * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-BSPC|
      * |     |     |     |     |     |      |     |     |     |     |     |
-     * |-----+-----+-----+-ESC-+-----|      |-----+-ENT-+-----+-----+-----|
+     * |-----+-----+-----+-ESC-+-TAB-|      |-----+-ENT-+-----+-----+-----|
      * |     |     |     |     |     |      |     |     |     |     |     |
      * `-----------------------------'      `-----------------------------'
      *            .-----------------.       .-----------------.
@@ -57,19 +58,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------.      ,-----------------------------.
      * |  Q  |  W  |  E  |  R  |  T  |      |  Y  |  U  |  I  |  O  |  P  |
      * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-----|
-     * |  A  |S CTL|D ALT|  F  |  G  |      |  H  |  J  |K ALT|L CTL|  ;  |
+     * |A GUI|S CTL|D ALT|  F  |  G  |      |  H  |  J  |K ALT|L CTL|; GUI|
      * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-----|
      * |  Z  |  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |  /  |
      * `-----------------------------'      `-----------------------------'
      *       .-----------------------.      .------------------.
-     *       | META | SPC SPE | SHFT |      | SHFT | NUM | TAB |
+     *       |      | SPC SPE | SHFT |      | SHFT | NUM |     |
      *       '-----------------------'      '------------------'
      */
     [_ALPHA] = LAYOUT_split_3x5_3(
-         KC_Q, KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,
-         KC_A, KC_CTL_S,KC_ALT_D,KC_F,    KC_G,          KC_H,   KC_J,   KC_ALT_K, KC_CTL_L,KC_SCLN,
-         KC_Z, KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   KC_COMMA, KC_DOT,  KC_SLSH,
-                  KC_LGUI, KC_SPE_SPC, KC_LSFT,          KC_RSFT, KC_NB, KC_TAB),
+         KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,
+         KC_GUI_A, KC_CTL_S,KC_ALT_D,KC_F,    KC_G,          KC_H,   KC_J,   KC_ALT_K, KC_CTL_L,KC_SCLN,
+         KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   KC_COMMA, KC_DOT,  KC_SLSH,
+                      KC_TRNS, KC_SPE_SPC, KC_LSFT,          KC_RSFT, KC_NB, KC_TRNS),
 
     /* Gaming layer
      *
@@ -88,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TILD,  KC_Q,   KC_W,   KC_E,   KC_R,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
          KC_LCTL , KC_A,   KC_S,   KC_D,   KC_F,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
          KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                       KC_LGUI, KC_SPC ,KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS),
+                       KC_TRNS, KC_SPC ,KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS),
 
     /* Special characters layer
      *
@@ -100,14 +101,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |  %  |  ^  |  [  |  ]  |     |      |  &  |     |  +  |  *  |     |
      * `-----------------------------'      `-----------------------------'
      *           .-------------------.      .-----------------.
-     *           |       |     |     |      |     |  "  |  _  |
+     *           |       |     |     |      |     |  "  |     |
      *           '-------------------'      '-----------------'
      */
     [_SPECIAL] = LAYOUT_split_3x5_3(
          KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,          KC_GRV,  KC_MINS, KC_EQL , KC_SLSH, KC_BSLS,
          KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_TRNS,          KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_QUOT,
          KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TRNS,          KC_AMPR, KC_TRNS, KC_PLUS, KC_ASTR, KC_TRNS,
-                           KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, LSFT(KC_QUOTE), LSFT(KC_MINS)),
+                           KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, LSFT(KC_QUOTE), KC_TRNS),
 
     /* Numbers/Function/Motion layer
      *
