@@ -36,7 +36,7 @@ enum {
 #define KC_CTL_S   MT(MOD_LCTL, KC_S)    // Tap for S, hold for Control
 #define KC_CTL_L   MT(MOD_RCTL, KC_L)    // Tap for L, hold for Control
 #define KC_SPE_SPC LT(_SPECIAL, KC_SPC)  // Tap for Space, hold for Special layer
-#define KC_NB      MO(_NUMBERS)          // Press for Numbers layer
+#define KC_NB      TG(_NUMBERS)          // Press for Numbers layer
 
     /* Combomap
      *
