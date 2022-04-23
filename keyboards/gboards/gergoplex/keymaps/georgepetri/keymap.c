@@ -31,6 +31,8 @@ enum {
 #include "g/keymap_combo.h"
 
 #define KC_GUI_A   MT(MOD_LGUI, KC_A)    // Tap for A, hold for Meta
+#define KC_SFT_Z   MT(MOD_RSFT, KC_Z)    // Tap for Z, hold for Shift
+#define KC_SFT_SL  MT(MOD_RSFT, KC_SLSH) // Tap for slash, hold for Shift
 #define KC_ALT_D   MT(MOD_LALT, KC_D)    // Tap for D, hold for Alt
 #define KC_ALT_K   MT(MOD_RALT, KC_K)    // Tap for K, hold for Alt
 #define KC_CTL_S   MT(MOD_LCTL, KC_S)    // Tap for S, hold for Control
@@ -60,17 +62,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-----|
      * |A GUI|S CTL|D ALT|  F  |  G  |      |  H  |  J  |K ALT|L CTL|  ;  |
      * |-----+-----+-----+-----+-----|      |-----+-----+-----+-----+-----|
-     * |  Z  |  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |  /  |
+     * |SFT Z|  X  |  C  |  V  |  B  |      |  N  |  M  |  ,  |  .  |SFT /|
      * `-----------------------------'      `-----------------------------'
      *       .-----------------------.      .------------------.
-     *       |      | SPC SPE | SHFT |      | SHFT | NUM |     |
+     *       |      | SPC SPE |      |      |      | NUM |     |
      *       '-----------------------'      '------------------'
      */
     [_ALPHA] = LAYOUT_split_3x5_3(
          KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,
          KC_GUI_A, KC_CTL_S,KC_ALT_D,KC_F,    KC_G,          KC_H,   KC_J,   KC_ALT_K, KC_CTL_L,KC_SCLN,
-         KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   KC_COMMA, KC_DOT,  KC_SLSH,
-                      KC_TRNS, KC_SPE_SPC, KC_LSFT,          KC_RSFT, KC_NB, KC_TRNS),
+         KC_SFT_Z, KC_X,    KC_C,    KC_V,    KC_B,          KC_N,   KC_M,   KC_COMMA, KC_DOT,  KC_SFT_SL,
+                      KC_TRNS, KC_SPE_SPC, KC_TRNS,          KC_TRNS, KC_NB, KC_TRNS),
 
     /* Gaming layer
      *
@@ -130,3 +132,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_TRNS, KC_TRNS, KC_TRNS,         KC_TRNS, KC_TRNS, KC_TRNS)
 };
 
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case KC_GUI_A:
+        case KC_CTL_S:
+        case KC_ALT_D:
+        case KC_ALT_K:
+        case KC_CTL_L:
+            return false;
+        default:
+            return true;
+    }
+}
