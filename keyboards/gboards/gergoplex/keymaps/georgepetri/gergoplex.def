@@ -2,6 +2,7 @@
 
 COMB(jmEnt,     KC_ENT,  KC_J,     KC_M)
 COMB(pscBspace, KC_BSPC, KC_P,     KC_SCLN)
+COMB(bquBspace, KC_BSPC, KC_BSLS,  KC_QUOT)
 COMB(olDelete,  KC_DEL,  KC_O,     KC_L)
 COMB(fvEsc,     KC_ESC,  KC_F,     KC_V)
 COMB(dcEsc,     KC_ESC,  KC_D,     KC_C)
