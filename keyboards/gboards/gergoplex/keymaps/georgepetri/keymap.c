@@ -37,7 +37,7 @@ enum {
 #define KC_ALT_K   MT(MOD_RALT, KC_K)    // Tap for K, hold for Alt
 #define KC_CTL_S   MT(MOD_LCTL, KC_S)    // Tap for S, hold for Control
 #define KC_SPEC    MO(_SPECIAL)          // Momentary switch to specials layer
-#define KC_NB      TG(_NUMBERS)          // Toggle Numbers layer
+#define KC_NB      MO(_NUMBERS)          // Momentary switch to numbers layer
 
     /* Combomap
      *
